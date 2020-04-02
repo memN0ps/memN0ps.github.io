@@ -16,11 +16,13 @@
 </div>
 <script type="text/javascript">
 const theme = localStorage.getItem('theme');
-
-if (theme === "light") {
-    document.documentElement.setAttribute('data-theme', 'light');
+if (theme === 'undefined') {
+   theme = "dark";
+}
+if (theme === "dark") {
+	document.documentElement.setAttribute('data-theme', 'dark');
 } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-theme', 'light');
 }
 const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
 

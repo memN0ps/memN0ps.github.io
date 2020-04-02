@@ -1,13 +1,11 @@
-title: dash
-author: GitHub User
-email: miguel-gonzalez@gmx.de
-description: > # this means to ignore newlines until "show_exerpts:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+title: memN0ps
+author: memN0ps
+#email: 
+description: > # 
+  Security Researcher at Synack Red Team | OSWE | OSCE | OSCP | OSWP
 show_excerpts: false # set to true to show excerpts on the homepage
 
-paginate: 1
+paginate: 10
 paginate_path: "/blog/page:num/"
 
 tag_permalink_style: pretty
@@ -20,23 +18,23 @@ dash:
   date_format: "%b %-d, %Y"
 
   disqus:
-    shortname: bitbrain-github-io
+    shortname: memN0ps.github.io
 
   # generate social links in footer
   # supported colors: green, red, orange, blue, cyan, pink, teal, yellow, indigo, purple
   social_links:
-    - url: https://twitter.com/bitbrain_
+    - url: https://twitter.com/memN0ps
       icon: twitter-square
       color: cyan
-    - url: https://bitbrain.itch.io
-      icon: itch-io
-      color: red
-    - url: https://github.com/bitbrain
+#    - url: https://
+#      icon: itch-io
+#      color: red
+    - url: https://github.com/memN0ps
       icon: github-square
       color: purple
 
 # Build settings
-theme: jekyll-dash
+remote_theme: bitbrain/jekyll-dash
 
 plugins:
  - jekyll-feed

@@ -13,12 +13,17 @@
   .command_prompt {
     color: $color-blue;
     font-size: $base-font-size;
-    margin-left: 0.1em;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      margin-bottom: -1px;
+      margin-left: 1px;
+    }
 
     &:before {
       content: $icon-chevron-right;
       @include font-awesome-icon;
-      margin-right: 0.2em;
     }
   }
 }
@@ -93,7 +98,12 @@
   width: 100%;
   animation: type 2s steps(60, end);
   margin-bottom: 1em;
-  margin-left: 0.5em;
+
+  & > svg {
+    color: $color-blue;
+    margin-right: 0.6em;
+    margin-bottom: -1px;
+  }
 
   &:after {
     content: "_";
@@ -104,8 +114,6 @@
   &:before {
     content: $icon-chevron-right;
     @include font-awesome-icon;
-    margin-right: 0.5em;
-    color: $color-blue;
   }
 }
 
@@ -259,7 +267,6 @@
   &:before {
     content: $icon-tag;
     @include font-awesome-icon;
-    margin-right: 0.5em;
   }
 }
 
@@ -358,10 +365,17 @@ ul.related-posts {
       margin: 0;
     }
 
+    & > svg.svg-inline--fa {
+      color: $color-green;
+      margin-right: 0.3em;
+      width: 22px;
+      height: 22px;
+      margin-bottom: -2px;
+    }
+
     &:before {
       content: $icon-flask;
       @include font-awesome-icon;
-      color: $color-green;
     }
   }
 }
