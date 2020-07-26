@@ -217,7 +217,7 @@ BOOL APIENTRY DllMain(HINSTANCE hModule, DWORD fdwReason, LPVOID lpReserved) {
 ```
 **Figure 3: dllmain.cpp**
 
-### Example 2: Classic DLL Injector
+### Example 3: Classic DLL Injector
 
 ```C++
 #include <iostream>
