@@ -66,7 +66,7 @@ It should be noted that the `CreateRemoteThread()` techniques is not very stealt
 
 Takes a snapshot of the specified processes, as well as the heaps, modules, and threads used by these processes.
 
-```C++
+```cpp
 HANDLE CreateToolhelp32Snapshot(
   DWORD dwFlags,
   DWORD th32ProcessID
@@ -77,7 +77,7 @@ HANDLE CreateToolhelp32Snapshot(
 
 Retrieves information about the first process encountered in a system snapshot.
 
-```C++
+```cpp
 BOOL Process32First(
   HANDLE           hSnapshot,
   LPPROCESSENTRY32 lppe
@@ -88,7 +88,7 @@ BOOL Process32First(
 
 Retrieves information about the next process recorded in a system snapshot.
 
-```C++
+```cpp
 BOOL Process32Next(
   HANDLE           hSnapshot,
   LPPROCESSENTRY32 lppe
@@ -99,7 +99,7 @@ BOOL Process32Next(
 
 Opens an existing local process object.
 
-```C++
+```cpp
 HANDLE OpenProcess(
   DWORD dwDesiredAccess,
   BOOL  bInheritHandle,
@@ -111,7 +111,7 @@ HANDLE OpenProcess(
 
 Reserves, commits, or changes the state of a region of memory within the virtual address space of a specified process. The function initializes the memory it allocates to zero.
 
-```C++
+```cpp
 LPVOID VirtualAllocEx(
   HANDLE hProcess,
   LPVOID lpAddress,
@@ -126,7 +126,7 @@ LPVOID VirtualAllocEx(
 Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails.
 
 
-```C++
+```cpp
 BOOL WriteProcessMemory(
   HANDLE  hProcess,
   LPVOID  lpBaseAddress,
@@ -142,7 +142,7 @@ Loads the specified module into the address space of the calling process. The sp
 
 For additional load options, use the LoadLibraryEx function.
 
-```C++
+```cpp
 HMODULE LoadLibraryA(
   LPCSTR lpLibFileName
 );
@@ -155,7 +155,7 @@ Creates a thread that runs in the virtual address space of another process.
 Use the CreateRemoteThreadEx function to create a thread that runs in the virtual address space of another process and optionally specify extended attributes.
 
 
-```C++
+```cpp
 HANDLE CreateRemoteThread(
   HANDLE                 hProcess,
   LPSECURITY_ATTRIBUTES  lpThreadAttributes,
@@ -173,7 +173,7 @@ Waits until the specified object is in the signaled state or the time-out interv
 
 To enter an alertable wait state, use the WaitForSingleObjectEx function. To wait for multiple objects, use WaitForMultipleObjects.
 
-```C++
+```cpp
 DWORD WaitForSingleObject(
   HANDLE hHandle,
   DWORD  dwMilliseconds
@@ -184,7 +184,7 @@ DWORD WaitForSingleObject(
 
 Releases, decommits, or releases and decommits a region of memory within the virtual address space of a specified process.
 
-```C++
+```cpp
 BOOL VirtualFreeEx(
   HANDLE hProcess,
   LPVOID lpAddress,
@@ -203,7 +203,7 @@ BOOL VirtualFreeEx(
 
 ### Example 2: Simple DLL
 
-```C++
+```cpp
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 #include <Windows.h>
@@ -219,7 +219,7 @@ BOOL APIENTRY DllMain(HINSTANCE hModule, DWORD fdwReason, LPVOID lpReserved) {
 
 ### Example 3: Classic DLL Injector
 
-```C++
+```cpp
 #include <iostream>
 #include <Windows.h>
 #include <TlHelp32.h>
