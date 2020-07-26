@@ -215,7 +215,7 @@ BOOL APIENTRY DllMain(HINSTANCE hModule, DWORD fdwReason, LPVOID lpReserved) {
 	return TRUE;
 }
 ```
-**Figure 2: dllmain.cpp**
+**Figure 3: dllmain.cpp**
 
 ### Example 2: Classic DLL Injector
 
@@ -306,7 +306,7 @@ int main() {
 	return 0;
 }
 ```
-**Figure 3: Injector.cpp**
+**Figure 4: Injector.cpp**
 
 
 The source code for my classic DLL injector can be found here:
