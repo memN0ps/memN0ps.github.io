@@ -3,7 +3,7 @@ layout: post
 title: "Kernel Mode Rootkits"
 ---
 
-## INCOMPLETE: This blog is still being worked on for educational purposes and it is incomplete.
+Note: This research as been discontinued.
 
 ### Description
 
