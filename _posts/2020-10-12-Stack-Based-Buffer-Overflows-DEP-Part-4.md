@@ -16,14 +16,16 @@ A buffer overflow is when an application attempts to write more data in a buffer
 
 ## What is Data Execution Prevention (DEP)
 
-Data Execution Prevention (DEP) is a memory protection mechanism that prevents code from being executed in areas of memory used to store data such as the stack and heap. Data Execution prevention marks the pages of memory as non-executable (NX), preventing shellcode from being executed on the stack.
+Data Execution Prevention (DEP) is a memory protection mechanism that prevents code from being executed in areas of memory used to store data such as the stack and heap. Data Execution Prevention (DEP) marks the pages of memory as non-executable (NX), preventing shellcode from being executed on the stack.
 
 
 ## Return Oriented Programming (ROP)
 
 Since we can't just drop shellcode on the stack like we usually do for a classic buffer overflow without any memory protection, we need to use something called Return Oriented programming. 
 
-Return Oriented Programming is a technique used in exploit development to counter-memory protections such as Data Execution Prevention (DEP) by using chaining together an existing sequence of instructions or snippets of code within the program called gadgets, usually followed by a `RETN` to give control back to the RIP/EIP register and execute our shellcode on the stack. We can use these instructions to return to another region in memory, rather than the intended area in memory, to execute a function that makes the stack executable.
+Return Oriented Programming is a technique used in exploit development to counter-memory protections such as Data Execution Prevention (DEP) by using chaining together existing sequence of instructions or snippets of code within the program called gadgets, usually followed by a `RETN`. The `RETN` instruction will POP the return address from the stack back into the EIP register and redirect execution flow. We can use these instructions to return to another region in memory, rather than the intended area in memory, to execute a function or code of our choice, that makes the stack executable (`VirtualProtect()`).
+
+When a function is called the caller places the arguments of the function on the stack then places the returns address on the stack (the next instruction to be executed right after the function is called). When a function has finished performing the intended tasks, it will call the `RET` instruction, which POPs the return address back into the EIP register to resume execution flow. We can hijack the execution flow to return to an existing function. In Linux, this function could be `system()` with the arguments `/bin/sh` (`ret2system`), which pops a shell or `mprotect()` `(ret2mprotect)`, which makes the stack executable. However, in Windows we have functions such as `VirtulAlloc(), HeapCreate(), SetProcessDEPPolicy(), NtSetInformationProcess(), VirtualProtect(), or WriteProtectMemory()` etc...
 
 
 To conclude; A gadget is an existing sequence of assembly instructions or snippets of code within the program and using, multiple gadgets make up an ROP chain. For example, we will be using an existing Windows API function called `VirtualProtect()` to make stack from non-executable to executable, so we can place our shellcode on the stack and have it executed.
